@@ -64,7 +64,7 @@ end)
 function EnsureFrameworkLoaded()
   if not frameworkLoaded then
       if Config.Framework == 'qbx' then
-          Framework = exports['qb-core']:GetCoreObject()
+          Framework = exports['qbx-core']:GetCoreObject()
           frameworkLoaded = true
       elseif Config.Framework == 'qb' then
           Framework = exports['qb-core']:GetCoreObject()
@@ -147,24 +147,26 @@ function InitializeHUD()
       -- Load player status from database
       if status then
           TriggerServerEvent('hud:server:UpdateStatus', status)
-      end  
+      end
+      
       SendNUIMessage({
           action = 'updateSettings',
           settings = hudSettings
       })
   end)
-
+  
   -- Start status saving loop
   StartStatusSavingLoop()
 end
 
 -- Framework-specific trigger callback
-function TriggerCallback(name, cb, ...)
+function TriggerCallback(name, cb)
   if not EnsureFrameworkLoaded() then
       -- If framework isn't loaded, try again in a moment
       SetTimeout(500, function() TriggerCallback(name, cb) end)
       return
   end
+  
   if Config.Framework == 'qbx' or Config.Framework == 'qb' then
       Framework.Functions.TriggerCallback(name, cb)
   elseif Config.Framework == 'esx' then
@@ -221,16 +223,16 @@ end, false)
 
 -- Close HUD configuration menu
 RegisterNUICallback('closeConfig', function(_, cb)
-    isConfigOpen = false
-    SetNuiFocus(false, false)
-    cb('ok')
+  isConfigOpen = false
+  SetNuiFocus(false, false)
+  cb('ok')
 end)
 
 -- Add this to handle escape key and other closing methods
 RegisterNUICallback('cancelSettings', function(_, cb)
-    isConfigOpen = false
-    SetNuiFocus(false, false)
-    cb('ok')
+  isConfigOpen = false
+  SetNuiFocus(false, false)
+  cb('ok')
 end)
 
 -- Save player status
@@ -478,7 +480,6 @@ AddEventHandler('baseevents:onPlayerDied', function()
         TriggerEvent('esx_status:getStatus', 'hunger', function(stat) if stat then status.hunger = stat.getPercent() end end)
         TriggerEvent('esx_status:getStatus', 'thirst', function(stat) if stat then status.thirst = stat.getPercent() end end)
         TriggerEvent('esx_status:getStatus', 'stress', function(stat) if stat then status.stress = stat.getPercent() end end)
-    end  
+    end
     TriggerServerEvent('hud:server:SaveStatus', status)
 end)
-

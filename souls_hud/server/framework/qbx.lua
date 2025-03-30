@@ -1,7 +1,7 @@
 -- QBX-specific functions
 if Config.Framework == 'qbx' then
     -- QBX-specific callback for getting player data
-    QBX = exports['qb-core']:GetCoreObject()
+    QBX = exports['qbx-core']:GetCoreObject()
     
     -- Register callback for QBX
     QBX.Functions.CreateCallback('hud:server:GetPlayerStats', function(source, cb)

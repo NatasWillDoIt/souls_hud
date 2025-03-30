@@ -7,7 +7,7 @@ local frameworkLoaded = false
 -- Function to load the framework
 function LoadFramework()
   if Config.Framework == 'qbx' then
-      Framework = exports['qb-core']:GetCoreObject()
+      Framework = exports['qbx-core']:GetCoreObject()
       frameworkLoaded = true
   elseif Config.Framework == 'qb' then
       Framework = exports['qb-core']:GetCoreObject()

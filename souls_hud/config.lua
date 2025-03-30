@@ -37,12 +37,12 @@ Config.DefaultElements = {
 
 -- Default HUD appearance - Cyberpunk Theme
 Config.DefaultAppearance = {
-  backgroundColor = "rgba(10, 10, 10, 0.7)",
-  borderColor = "rgba(0, 243, 255, 0.5)",
+  backgroundColor = "rgba(15, 15, 18, 0.6)",
+  borderColor = "rgba(0, 240, 255, 0.5)",
   borderWidth = 1,
-  borderRadius = 2,
+  borderRadius = 0,
   fontColor = "#ffffff",
-  fontSize = 14
+  fontSize = 16
 }
 
 -- Hide default GTA HUD elements
