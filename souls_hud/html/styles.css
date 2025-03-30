@@ -1,0 +1,728 @@
+/* Cyberpunk HUD Styles */
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Share+Tech+Mono&display=swap");
+
+:root {
+  --neon-blue: #00f3ff;
+  --neon-pink: #ff00ff;
+  --neon-yellow: #ffff00;
+  --neon-green: #00ff66;
+  --neon-red: #ff0033;
+  --cyber-black: #0a0a0a;
+  --cyber-dark: #111111;
+  --cyber-bg: rgba(10, 10, 10, 0.7);
+  --cyber-border: rgba(0, 243, 255, 0.5);
+  --cyber-glow: 0 0 10px rgba(0, 243, 255, 0.7);
+  --cyber-text-glow: 0 0 5px rgba(0, 243, 255, 0.7);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Share Tech Mono", monospace;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  user-select: none;
+  background-color: transparent;
+}
+
+/* Main HUD Container */
+#hud-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* HUD Element Base Styles */
+.hud-element {
+  position: absolute;
+  background-color: var(--cyber-bg);
+  border: 1px solid var(--cyber-border);
+  border-radius: 2px;
+  color: #fff;
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 140px;
+  pointer-events: none;
+  box-shadow: var(--cyber-glow);
+  backdrop-filter: blur(2px);
+  text-shadow: var(--cyber-text-glow);
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+}
+
+.hud-element::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+  animation: scanline 3s linear infinite;
+}
+
+.hud-element .icon {
+  font-size: 16px;
+  width: 20px;
+  text-align: center;
+  color: var(--neon-blue);
+}
+
+.hud-element .value {
+  font-size: 14px;
+  min-width: 30px;
+  text-align: right;
+  font-family: "Orbitron", sans-serif;
+  font-weight: 500;
+}
+
+.progress-container {
+  flex-grow: 1;
+  height: 8px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 0;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.progress-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.2),
+    rgba(0, 0, 0, 0.2) 2px,
+    rgba(0, 0, 0, 0) 2px,
+    rgba(0, 0, 0, 0) 4px
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 100%;
+  transition: width 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-bar::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: shine 2s linear infinite;
+}
+
+/* Default positions for HUD elements - Bottom Left */
+#health {
+  left: 1%;
+  bottom: 3%;
+}
+
+#health .progress-bar {
+  background-color: var(--neon-red);
+  box-shadow: 0 0 10px var(--neon-red);
+}
+
+#armor {
+  left: 1%;
+  bottom: 6%;
+}
+
+#armor .progress-bar {
+  background-color: var(--neon-blue);
+  box-shadow: 0 0 10px var(--neon-blue);
+}
+
+#hunger {
+  left: 1%;
+  bottom: 9%;
+}
+
+#hunger .progress-bar {
+  background-color: var(--neon-yellow);
+  box-shadow: 0 0 10px var(--neon-yellow);
+}
+
+#thirst {
+  left: 1%;
+  bottom: 12%;
+}
+
+#thirst .progress-bar {
+  background-color: var(--neon-blue);
+  box-shadow: 0 0 10px var(--neon-blue);
+}
+
+#stamina {
+  left: 1%;
+  bottom: 15%;
+}
+
+#stamina .progress-bar {
+  background-color: var(--neon-green);
+  box-shadow: 0 0 10px var(--neon-green);
+}
+
+#oxygen {
+  left: 1%;
+  bottom: 18%;
+}
+
+#oxygen .progress-bar {
+  background-color: #ffffff;
+  box-shadow: 0 0 10px #ffffff;
+}
+
+#stress {
+  left: 1%;
+  bottom: 21%;
+}
+
+#stress .progress-bar {
+  background-color: var(--neon-pink);
+  box-shadow: 0 0 10px var(--neon-pink);
+}
+
+#voice {
+  left: 1%;
+  bottom: 24%;
+}
+
+.voice-indicator {
+  display: flex;
+  gap: 2px;
+}
+
+.voice-level {
+  width: 6px;
+  height: 15px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.voice-level.active {
+  background-color: var(--neon-yellow);
+  box-shadow: 0 0 10px var(--neon-yellow);
+}
+
+/* Vehicle elements - Bottom Left */
+.vehicle-element {
+  display: none; /* Hidden by default, shown when in vehicle */
+}
+
+#speedometer {
+  left: 1%;
+  bottom: 27%;
+}
+
+#speedometer .progress-bar {
+  background-color: var(--neon-blue);
+  box-shadow: 0 0 10px var(--neon-blue);
+}
+
+#fuel {
+  left: 1%;
+  bottom: 30%;
+}
+
+#fuel .progress-bar {
+  background-color: var(--neon-green);
+  box-shadow: 0 0 10px var(--neon-green);
+}
+
+/* Configuration Menu */
+#config-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px;
+  height: 600px;
+  background-color: var(--cyber-dark);
+  border: 1px solid var(--cyber-border);
+  box-shadow: var(--cyber-glow);
+  display: none;
+  flex-direction: column;
+  color: #fff;
+  z-index: 1000;
+  font-family: "Share Tech Mono", monospace;
+  clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+}
+
+#config-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: 1px solid var(--cyber-border);
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+#config-header h2 {
+  font-size: 20px;
+  font-weight: 500;
+  font-family: "Orbitron", sans-serif;
+  color: var(--neon-blue);
+  text-shadow: 0 0 5px var(--neon-blue);
+}
+
+#close-config {
+  background: none;
+  border: none;
+  color: var(--neon-blue);
+  font-size: 20px;
+  cursor: pointer;
+  text-shadow: 0 0 5px var(--neon-blue);
+}
+
+#config-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--cyber-border);
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.tab-button {
+  padding: 10px 20px;
+  background: none;
+  border: none;
+  color: #ccc;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: "Share Tech Mono", monospace;
+}
+
+.tab-button.active {
+  color: var(--neon-blue);
+  border-bottom: 2px solid var(--neon-blue);
+  text-shadow: 0 0 5px var(--neon-blue);
+}
+
+#config-content {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* Elements Tab */
+.element-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.element-item {
+  background-color: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--cyber-border);
+  padding: 15px;
+  position: relative;
+  overflow: hidden;
+}
+
+.element-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+  animation: scanline 3s linear infinite;
+}
+
+.element-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.element-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.element-title i {
+  width: 20px;
+  text-align: center;
+  color: var(--neon-blue);
+}
+
+.element-title h3 {
+  font-family: "Orbitron", sans-serif;
+  color: #fff;
+}
+
+.vehicle-tag {
+  background-color: var(--neon-blue);
+  color: #000;
+  font-size: 10px;
+  padding: 2px 5px;
+  margin-left: 5px;
+  font-family: "Share Tech Mono", monospace;
+}
+
+.element-toggle {
+  position: relative;
+  width: 40px;
+  height: 20px;
+  background-color: #444;
+  border-radius: 0;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.element-toggle.active {
+  background-color: var(--neon-blue);
+  box-shadow: 0 0 10px var(--neon-blue);
+}
+
+.element-toggle::after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background-color: #fff;
+  top: 1px;
+  left: 1px;
+  transition: transform 0.2s;
+}
+
+.element-toggle.active::after {
+  transform: translateX(20px);
+}
+
+.element-settings {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.setting-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+
+.setting-item label {
+  font-size: 14px;
+  color: #ccc;
+  font-family: "Share Tech Mono", monospace;
+}
+
+.setting-item input[type="color"] {
+  width: 100%;
+  height: 30px;
+  border: none;
+  background-color: #333;
+  cursor: pointer;
+}
+
+.setting-item input[type="range"] {
+  width: 100%;
+  cursor: pointer;
+  accent-color: var(--neon-blue);
+}
+
+.range-value {
+  font-size: 12px;
+  color: #ccc;
+  font-family: "Share Tech Mono", monospace;
+}
+
+/* Appearance Tab */
+.setting-group {
+  background-color: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--cyber-border);
+  padding: 15px;
+  margin-bottom: 15px;
+  position: relative;
+  overflow: hidden;
+}
+
+.setting-group::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+  animation: scanline 3s linear infinite;
+}
+
+.setting-group h3 {
+  margin-bottom: 15px;
+  font-size: 16px;
+  font-weight: 500;
+  font-family: "Orbitron", sans-serif;
+  color: var(--neon-blue);
+}
+
+/* Presets Tab */
+.preset-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.preset-item {
+  background-color: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--cyber-border);
+  padding: 15px;
+  position: relative;
+  overflow: hidden;
+}
+
+.preset-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+  animation: scanline 3s linear infinite;
+}
+
+.preset-item h3 {
+  margin-bottom: 5px;
+  font-size: 16px;
+  font-weight: 500;
+  font-family: "Orbitron", sans-serif;
+  color: var(--neon-blue);
+}
+
+.preset-item p {
+  color: #ccc;
+  font-size: 14px;
+  margin-bottom: 10px;
+  font-family: "Share Tech Mono", monospace;
+}
+
+.load-preset {
+  background-color: var(--neon-blue);
+  color: #000;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-family: "Share Tech Mono", monospace;
+  position: relative;
+  overflow: hidden;
+}
+
+.load-preset::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: shine 2s linear infinite;
+}
+
+.preset-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.preset-actions button {
+  flex: 1;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: #fff;
+  border: 1px solid var(--cyber-border);
+  padding: 10px;
+  cursor: pointer;
+  font-family: "Share Tech Mono", monospace;
+  position: relative;
+  overflow: hidden;
+}
+
+.preset-actions button::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: shine 2s linear infinite;
+}
+
+#reset-default {
+  background-color: var(--neon-red);
+  color: #fff;
+  border: none;
+}
+
+/* Footer */
+#config-footer {
+  padding: 15px 20px;
+  border-top: 1px solid var(--cyber-border);
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+#config-footer button {
+  padding: 10px 20px;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  font-family: "Share Tech Mono", monospace;
+  position: relative;
+  overflow: hidden;
+}
+
+#config-footer button::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: shine 2s linear infinite;
+}
+
+#save-settings {
+  background-color: var(--neon-blue);
+  color: #000;
+}
+
+#cancel-settings {
+  background-color: #555;
+  color: #fff;
+}
+
+/* Draggable elements in config mode */
+.config-mode .hud-element {
+  pointer-events: all;
+  cursor: move;
+  box-shadow: 0 0 15px var(--neon-blue);
+}
+
+/* Animations */
+@keyframes scanline {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes shine {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes glitch {
+  0% {
+    clip-path: inset(40% 0 61% 0);
+  }
+  20% {
+    clip-path: inset(92% 0 1% 0);
+  }
+  40% {
+    clip-path: inset(43% 0 1% 0);
+  }
+  60% {
+    clip-path: inset(25% 0 58% 0);
+  }
+  80% {
+    clip-path: inset(54% 0 7% 0);
+  }
+  100% {
+    clip-path: inset(58% 0 43% 0);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 1366px) {
+  .hud-element {
+    transform: scale(0.9);
+  }
+}
+
+@media (max-width: 1024px) {
+  .hud-element {
+    transform: scale(0.8);
+  }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--neon-blue);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--neon-pink);
+}
+

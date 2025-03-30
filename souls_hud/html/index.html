@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cyberpunk HUD</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <!-- Main HUD Container -->
+  <div id="hud-container">
+      <!-- Health -->
+      <div id="health" class="hud-element">
+          <div class="icon"><i class="fas fa-heart"></i></div>
+          <div class="progress-container">
+              <div class="progress-bar"></div>
+          </div>
+          <div class="value">100</div>
+      </div>
+
+      <!-- Armor -->
+      <div id="armor" class="hud-element">
+          <div class="icon"><i class="fas fa-shield-alt"></i></div>
+          <div class="progress-container">
+              <div class="progress-bar"></div>
+          </div>
+          <div class="value">100</div>
+      </div>
+
+      <!-- Hunger -->
+      <div id="hunger" class="hud-element">
+          <div class="icon"><i class="fas fa-utensils"></i></div>
+          <div class="progress-container">
+              <div class="progress-bar"></div>
+          </div>
+          <div class="value">100</div>
+      </div>
+
+      <!-- Thirst -->
+      <div id="thirst" class="hud-element">
+          <div class="icon"><i class="fas fa-tint"></i></div>
+          <div class="progress-container">
+              <div class="progress-bar"></div>
+          </div>
+          <div class="value">100</div>
+      </div>
+
+      <!-- Stamina -->
+      <div id="stamina" class="hud-element">
+          <div class="icon"><i class="fas fa-running"></i></div>
+          <div class="progress-container">
+              <div class="progress-bar"></div>
+          </div>
+          <div class="value">100</div>
+      </div>
+
+      <!-- Oxygen -->
+      <div id="oxygen" class="hud-element">
+          <div class="icon"><i class="fas fa-lungs"></i></div>
+          <div class="progress-container">
+              <div class="progress-bar"></div>
+          </div>
+          <div class="value">100</div>
+      </div>
+
+      <!-- Stress -->
+      <div id="stress" class="hud-element">
+          <div class="icon"><i class="fas fa-brain"></i></div>
+          <div class="progress-container">
+              <div class="progress-bar"></div>
+          </div>
+          <div class="value">0</div>
+      </div>
+
+      <!-- Voice -->
+      <div id="voice" class="hud-element">
+          <div class="icon"><i class="fas fa-microphone"></i></div>
+          <div class="voice-indicator">
+              <div class="voice-level voice-level-1"></div>
+              <div class="voice-level voice-level-2"></div>
+              <div class="voice-level voice-level-3"></div>
+          </div>
+      </div>
+
+      <!-- Speedometer (only visible in vehicles) -->
+      <div id="speedometer" class="hud-element vehicle-element">
+          <div class="icon"><i class="fas fa-tachometer-alt"></i></div>
+          <div class="value">0 km/h</div>
+          <div class="progress-container">
+              <div class="progress-bar"></div>
+          </div>
+      </div>
+
+      <!-- Fuel (only visible in vehicles) -->
+      <div id="fuel" class="hud-element vehicle-element">
+          <div class="icon"><i class="fas fa-gas-pump"></i></div>
+          <div class="progress-container">
+              <div class="progress-bar"></div>
+          </div>
+          <div class="value">100</div>
+      </div>
+  </div>
+
+  <!-- HUD Configuration Menu -->
+  <div id="config-container">
+      <div id="config-header">
+          <h2>CYBERPUNK HUD SETTINGS</h2>
+          <button id="close-config"><i class="fas fa-times"></i></button>
+      </div>
+      
+      <div id="config-tabs">
+          <button class="tab-button active" data-tab="elements">ELEMENTS</button>
+          <button class="tab-button" data-tab="appearance">APPEARANCE</button>
+          <button class="tab-button" data-tab="presets">PRESETS</button>
+      </div>
+      
+      <div id="config-content">
+          <!-- Elements Tab -->
+          <div class="tab-content active" id="elements-tab">
+              <div class="element-list">
+                  <!-- Generated dynamically in script.js -->
+              </div>
+          </div>
+          
+          <!-- Appearance Tab -->
+          <div class="tab-content" id="appearance-tab">
+              <div class="setting-group">
+                  <h3>GENERAL APPEARANCE</h3>
+                  
+                  <div class="setting-item">
+                      <label for="background-color">Background Color:</label>
+                      <input type="color" id="background-color">
+                  </div>
+                  
+                  <div class="setting-item">
+                      <label for="border-color">Border Color:</label>
+                      <input type="color" id="border-color">
+                  </div>
+                  
+                  <div class="setting-item">
+                      <label for="border-width">Border Width:</label>
+                      <input type="range" id="border-width" min="0" max="5" step="1">
+                      <span class="range-value">2px</span>
+                  </div>
+                  
+                  <div class="setting-item">
+                      <label for="border-radius">Border Radius:</label>
+                      <input type="range" id="border-radius" min="0" max="20" step="1">
+                      <span class="range-value">5px</span>
+                  </div>
+                  
+                  <div class="setting-item">
+                      <label for="font-color">Font Color:</label>
+                      <input type="color" id="font-color">
+                  </div>
+                  
+                  <div class="setting-item">
+                      <label for="font-size">Font Size:</label>
+                      <input type="range" id="font-size" min="10" max="20" step="1">
+                      <span class="range-value">14px</span>
+                  </div>
+              </div>
+          </div>
+          
+          <!-- Presets Tab -->
+          <div class="tab-content" id="presets-tab">
+              <div class="preset-list">
+                  <div class="preset-item" data-preset="default">
+                      <h3>CYBERPUNK</h3>
+                      <p>Neon-colored futuristic HUD</p>
+                      <button class="load-preset">LOAD</button>
+                  </div>
+                  
+                  <div class="preset-item" data-preset="minimal">
+                      <h3>MINIMAL</h3>
+                      <p>Simplified HUD with essential elements</p>
+                      <button class="load-preset">LOAD</button>
+                  </div>
+                  
+                  <div class="preset-item" data-preset="compact">
+                      <h3>COMPACT</h3>
+                      <p>Space-saving layout for all elements</p>
+                      <button class="load-preset">LOAD</button>
+                  </div>
+                  
+                  <div class="preset-item" data-preset="bottomLeft">
+                      <h3>BOTTOM LEFT</h3>
+                      <p>All elements stacked in bottom left corner</p>
+                      <button class="load-preset">LOAD</button>
+                  </div>
+              </div>
+              
+              <div class="preset-actions">
+                  <button id="save-preset">SAVE CURRENT AS PRESET</button>
+                  <button id="reset-default">RESET TO DEFAULT</button>
+              </div>
+          </div>
+      </div>
+      
+      <div id="config-footer">
+          <button id="save-settings">SAVE SETTINGS</button>
+          <button id="cancel-settings">CANCEL</button>
+      </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
+
