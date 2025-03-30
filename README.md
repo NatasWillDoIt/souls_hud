@@ -1,5 +1,5 @@
 # souls_hud
-this is a hud that has a cyberpunk feel and look do /togglehud to remove all hud elements 
+this is a fully modular hud that has a cyberpunk feel and look do /togglehud to remove all hud elements meaning you can move the hud ui anywhere
 [Natas Discord](https://www.dsc.gg/natas)
 
 Supports :
