@@ -6,3 +6,9 @@ Supports :
 [Qbox](https://www.qbox.re)
 [QBCore](https://github.com/qbcore-framework)
 [ESX](https://github.com/esx-framework)
+
+Commands :
+```/Togglehud```
+```/hudsettings```
+
+
